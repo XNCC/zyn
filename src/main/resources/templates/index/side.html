@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <link rel="stylesheet" type="text/css" href="static/index/css/left-side-menu.css">
+  <link rel="stylesheet" type="text/css" href="static/index/fonts/iconfont.css">
+  <script type="text/javascript" src="static/index/js/jquery.slimscroll.min.js"></script>
+  <script type="text/javascript" src="static/index/js/left-side-menu.js"></script>
+
+  <script src="static/layui/layui.js"
+          src1="http://local.res.layui.com/layui/release/laydate/dist/laydate.js"></script>
+  <link rel=stylesheet href="static/layui/css/layui.css">
+</head>
+<body style="background-color: rgb(244, 244, 244);">
+<!-- 头部 -->
+<div class="top" style="width: 100%;height: 80px;background-color: #397bc5"></div>
+<!-- 侧边栏 -->
+<div class="left-side-menu1" style="float: left;">
+  <div class="lsm-expand-btn1">
+    <div class="lsm-mini-btn1">
+      <label>
+        <input type="checkbox" checked="checked">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="30"/>
+          <path class="line--1" d="M0 40h62c18 0 18-20-17 5L31 55"/>
+          <path class="line--2" d="M0 50h80"/>
+          <path class="line--3" d="M0 60h62c18 0 18 20-17-5L31 45"/>
+        </svg>
+      </label>
+    </div>
+
+  </div>
+  <div class="lsm-container">
+    <div class="lsm-scroll">
+      <div class="lsm-sidebar">
+        <ul id="mytab2">
+          <li class="lsm-sidebar-item">
+            <a href="javascript:;"><i class="my-icon lsm-sidebar-icon icon_3"></i><span>订单管理</span><i
+                    class="my-icon lsm-sidebar-more"></i></a>
+            <ul>
+              <li><a th:href="@{/index}"><span>任务订单</span></a></li>
+              <li><a th:href="@{/need}"><span>接单任务</span></a></li>
+            </ul>
+          </li>
+          <li class="lsm-sidebar-item">
+            <a href="javascript:;"><i class="my-icon lsm-sidebar-icon icon-users"></i><span>用户管理</span><i
+                    class="my-icon lsm-sidebar-more"></i></a>
+            <ul>
+              <li><a href="javascript:;"><span>火影忍者8</span></a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

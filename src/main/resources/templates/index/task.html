@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>任务管理</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" type="text/css" href="static/css/left-side-menu.css">
+    <link rel="stylesheet" type="text/css" href="static/font/iconfont.css">
+    <script type="text/javascript" src="static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="static/js/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="static/js/left-side-menu.js"></script>
+
+    <script src="static/layui/layui.js"
+            src1="http://local.res.layui.com/layui/release/laydate/dist/laydate.js"></script>
+    <link rel=stylesheet href="static/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="static/index/css/jquery.sPage.css">
+    <link rel=stylesheet href="static/index/common.css">
+</head>
+<body style="background-color: rgb(244, 244, 244);">
+<!-- 头部 -->
+<div class="top" style="width: 100%;height: 80px;background-color: #397bc5"></div>
+<!-- 侧边栏 -->
+<div class="left-side-menu1" style="float: left;">
+    <div class="lsm-expand-btn1">
+        <div class="lsm-mini-btn1">
+            <label>
+                <input type="checkbox" checked="checked">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="30"/>
+                    <path class="line--1" d="M0 40h62c18 0 18-20-17 5L31 55"/>
+                    <path class="line--2" d="M0 50h80"/>
+                    <path class="line--3" d="M0 60h62c18 0 18 20-17-5L31 45"/>
+                </svg>
+            </label>
+        </div>
+
+    </div>
+    <div class="lsm-container">
+        <div class="lsm-scroll">
+            <div class="lsm-sidebar">
+                <ul id="mytab2">
+                    <li class="lsm-sidebar-item">
+                        <a href="javascript:;"><i class="my-icon lsm-sidebar-icon icon_3"></i><span>订单管理</span><i
+                                class="my-icon lsm-sidebar-more"></i></a>
+                        <ul>
+                            <li><a th:href="@{/task}"><span>任务订单</span></a></li>
+                            <li><a th:href="@{/need}"><span>发布任务</span></a></li>
+                            <li><a th:href="@{/accepTask}"><span>接单任务</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="lsm-sidebar-item">
+                        <a href="javascript:;"><i class="my-icon lsm-sidebar-icon icon-users"></i><span>用户管理</span><i
+                                class="my-icon lsm-sidebar-more"></i></a>
+                        <ul>
+                            <li><a href="javascript:;"><span>火影忍者8</span></a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 侧边栏结束 -->
+<div class="layui-container">
+    <div class="row">
+        <div class="layui-card">
+            <div class="layui-card-header" style="text-align: center;"><strong>任务订单</strong></div>
+            <div class="layui-card-body">
+                <button type="button" class="btn btn-info">发布任务</button>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>订单编号</th>
+                        <th style="width:15%">标题</th>
+                        <th>状态</th>
+                        <th>手机号</th>
+                        <th>微信号</th>
+                        <th>描述价格(￥)</th>
+                        <th>任务截止时间</th>
+                        <th>创建时间</th>
+                        <th>查看</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="showItem">
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12 setManagerBlogcenter">
+                <div id="myPage" class="demo"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+    <p>适用浏览器：360、FireFox、Chrome、Opera、傲游、搜狗、世界之窗. 不支持Safari、IE8及以下浏览器。</p>
+    <p>来源：<a href="http://www.kaiu.net/" target="_blank">开优网络</a></p>
+</div>
+</body>
+<script src="static/index/js/jquery.sPage.min.js"></script>
+<script>
+    $(function () {
+        var pagecount = 1
+        var totalcount = 10
+        ajaxPage(1);
+        $("#myPage").sPage({
+            page: pagecount,//当前页码
+            pageSize: 1,//每页显示多少条数据，默认10条
+            total: totalcount,//数据总条数
+            showTotal: true,//是否显示总条数，默认关闭：false
+            totalTxt: "共{total}条",//数据总条数文字描述，{total}为占位符
+            showSkip: true,//是否显示跳页，默认关闭：false
+            showPN: true,//是否显示上下翻页，默认开启：true
+            prevPage: "上一页",//上翻页文字描述，默认“上一页”
+            nextPage: "下一页",//下翻页文字描述，默认“下一页”
+            backFun: function (page) {
+                ajaxPage(page);
+            }
+        });
+    })
+
+    //结合Ajax使用
+    function ajaxPage(page) {
+        var p = page || 1;
+        $.ajax({
+            type: "GET",
+            url: "task/taskManager",
+            data: {
+                page: p,
+                pageSize: 10,
+            },
+            dataType: "json",
+            success: function (data) {
+                //数据处理   ----一定要清屏
+                $("#showItem").empty();
+                for (var i = 0; i < data.rows.length; i++) {
+                    $("#showItem").append(
+                        " <tr>" +
+                        "  <td>" + data.rows[i].id + "</td>" +
+                        "  <td>" + data.rows[i].title + "</td>" +
+                        "  <td>" + getstatus(data.rows[i].status) + "</td>" +
+                        "    <td>" + data.rows[i].phone + "</td>" +
+                        "    <td>" + data.rows[i].wechat + "</td>" +
+                        "    <td>" + data.rows[i].money + "</td>" +
+                        "    <td>" + data.rows[i].deadline + "</td>" +
+                        "    <td>" + data.rows[i].createTime + "</td>" +
+                        "    <td> <a type=\"button\" class=\"btn btn-info\" href=\"/need?id=" + data.rows[i].id + "\">查看需求</a>" +
+                        "    </td>" +
+                        "     <td>" +
+                        "         <a type=\"button\" class=\"btn btn-info\"  href=\"/need?id=" + data.rows[i].id + "\">编辑订单</a>" +
+                        "         <a type=\"button\" class=\"btn btn-info\" class=\"release\" value='" + data.rows[i].id + "'>发布订单</a>" +
+                        "     </td>" +
+                        "  </tr>")
+                }
+                var pagecount = data.page
+                var totalcount = data.total
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+
+    function getstatus(status) {
+        if (status == 1) {
+            return "已发布";
+        } else {
+            return "草稿";
+        }
+    }
+</script>
+</html>

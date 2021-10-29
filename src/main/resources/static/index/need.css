@@ -1,0 +1,27 @@
+.layui-col-space50{margin: 0 -25px}
+.layui-col-space50>*{padding:0 25px}
+/*.layui-container{*/
+/*    margin-top: 5%;*/
+/*    width: 80%;*/
+/*    margin-left: 15%;*/
+/*}*/
+.layui-form-label {
+    width: 100px;
+}
+.layui-input-block {
+    margin-left: 130px;
+
+}
+.in{
+    width: 60%;
+}
+label.required:after {   /* 给红色的必填项打红色星号（文字后）如果打前面用before*/
+    content: ' *';
+    color: red;
+}
+/*body{*/
+/*    background-color: rgb(244, 244, 244);*/
+/*}*/
+/*.layui-card{*/
+/*    border-radius: 8px;*/
+/*}*/

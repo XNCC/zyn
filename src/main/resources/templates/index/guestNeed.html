@@ -19,60 +19,17 @@
     <script type="text/javascript" src="/static/js/jquery.slimscroll.min.js"></script>
     <script type="text/javascript" src="/static/js/left-side-menu.js"></script>
 
-    <script src="/static/layui/layui.js" src1="http://local.res.layui.com/layui/release/laydate/dist/laydate.js" ></script>
+    <script src="/static/layui/layui.js"
+            src1="http://local.res.layui.com/layui/release/laydate/dist/laydate.js"></script>
     <link rel=stylesheet href="/static/layui/css/layui.css">
 
     <link rel=stylesheet href="/static/index/need.css">
     <link rel=stylesheet href="/static/index/common.css">
 </head>
 <body style="background-color: rgb(244, 244, 244);">
-<!-- 头部 -->
-<div class="top" style="width: 100%;height: 80px;background-color: #397bc5"></div>
-<!-- 侧边栏 -->
-<div class="left-side-menu1" style="float: left;">
-    <div class="lsm-expand-btn1">
-        <div class="lsm-mini-btn1">
-            <label>
-                <input type="checkbox" checked="checked">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="30"/>
-                    <path class="line--1" d="M0 40h62c18 0 18-20-17 5L31 55"/>
-                    <path class="line--2" d="M0 50h80"/>
-                    <path class="line--3" d="M0 60h62c18 0 18 20-17-5L31 45"/>
-                </svg>
-            </label>
-        </div>
-
-    </div>
-    <div class="lsm-container">
-        <div class="lsm-scroll">
-            <div class="lsm-sidebar">
-                <ul id="mytab2">
-                    <li class="lsm-sidebar-item">
-                        <a href="javascript:;"><i class="my-icon lsm-sidebar-icon icon_3"></i><span>订单管理</span><i
-                                class="my-icon lsm-sidebar-more"></i></a>
-                        <ul>
-                            <li><a th:href="@{/user/task}"><span>任务订单</span></a></li>
-                            <li><a th:href="@{/user/need}"><span>发布任务</span></a></li>
-                            <li><a th:href="@{/user/accepTask}"><span>接单任务</span></a></li>
-                        </ul>
-                    </li>
-                    <li class="lsm-sidebar-item">
-                        <a href="javascript:;"><i class="my-icon lsm-sidebar-icon icon-users"></i><span>用户管理</span><i
-                                class="my-icon lsm-sidebar-more"></i></a>
-                        <ul>
-                            <li><a href="javascript:;"><span>火影忍者8</span></a></li>
-                        </ul>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- 主页面内容 -->
 <div class="layui-container">
+    <input type="text" style="display: none" readonly th:value="${need.id}" id="id">
     <div class="layui-card">
         <div class="layui-card-header" style="text-align: center;"><strong>发布任务</strong></div>
         <div class="layui-card-body">
@@ -81,30 +38,30 @@
                     <div class="layui-card">
                         <div class="layui-card-body">
                             <form class="layui-form layui-form-pane1" lay-filter="first" style="">
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">选择框</label>
-                                    <div class="layui-input-block in">
-                                        <select id="classify" name="classify" lay-filter="interest">
-                                            <option value="0">脚本</option>
-                                            <option value="1">web</option>
-                                            <option value="2">游戏</option>
-                                            <option value="3">爬虫</option>
-                                            <option value="4">其他</option>
-                                        </select>
-                                    </div>
-                                </div>
+<!--                                <div class="layui-form-item">-->
+<!--                                    <label class="layui-form-label">标签</label>-->
+<!--                                    <div class="layui-input-block in">-->
+<!--                                        <input type="text" name="classify" id="classify" lay-verify="required"-->
+<!--                                               lay-verType="tips"-->
+<!--                                               required readonly th:value="${need.classify}"-->
+<!--                                               class="layui-input">-->
+<!--                                    </div>-->
+<!--                                </div>-->
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">标题</label><span style="color:red">*</span>
                                     <div class="layui-input-block in">
-                                        <input type="text" name="title" id="title" lay-verify="required" lay-verType="tips"
-                                               required
+                                        <input type="text" name="title" id="title" lay-verify="required"
+                                               lay-verType="tips"
+                                               required readonly th:value="${need.title}"
                                                class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">需求详情</label><span style="color:red">*</span>
                                     <div class="layui-input-block">
-                                         <textarea name="comment" id="demo" class="layui-hide">
+                                         <textarea name="comment" id="demo" class="layui-hide"
+                                                   th:text="${need.comment}">
+
                                     </textarea>
                                     </div>
                                 </div>
@@ -124,10 +81,22 @@
                                                         <th>操作</th>
                                                     </tr>
                                                     </thead>
-                                                    <tbody id="demoList"></tbody>
+                                                    <tbody id="demoList" >
+                                                        <tr th:each="obj,iterStat:${urlList}">
+                                                            <td th:text="${obj}"></td>
+                                                            <td></td>
+                                                            <td th:attr='returnUrl=${obj}'>已上传</td>
+                                                            <td>
+                                                                <button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">
+                                                                    删除
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
                                                 </table>
                                                 <div style="text-align: right">
-                                                    <button type="button" class="layui-btn layui-btn-normal" id="upload">
+                                                    <button type="button" class="layui-btn layui-btn-normal"
+                                                            id="upload">
                                                         上传
                                                     </button>
                                                 </div>
@@ -138,29 +107,33 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">预算金额</label><span style="color:red">*</span>
                                     <div class="layui-input-block in">
-                                        <input type="text" name="money" id="money" required lay-verify="required|number|Ndouble"
-                                               lay-verType="tips" class="layui-input">元
+                                        <input type="text" name="money" id="money" required
+                                               lay-verify="required|number|Ndouble"
+                                               lay-verType="tips" class="layui-input" th:value="${need.money}">元
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">截至日期</label><span style="color:red">*</span>
                                     <div class="layui-input-block in">
-                                        <input type="text" name="deadline" lay-verify="required" required class="layui-input"
-                                               id="test2">
+                                        <input type="text" name="deadline" lay-verify="required" required
+                                               class="layui-input"
+                                               id="test2" th:value="${#dates.format(need.deadline, 'yyyy-MM-dd')}">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">手机号</label><span style="color:red">*</span>
                                     <div class="layui-input-block in">
-                                        <input type="tel" name="phone" id="phone" lay-verify="required|phone|number" required
-                                               lay-verType="tips" class="layui-input">
+                                        <input type="tel" name="phone" id="phone" lay-verify="required|phone|number"
+                                               required
+                                               lay-verType="tips" class="layui-input" th:value="${need.phone}">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">微信号</label>
                                     <div class="layui-input-block in">
-                                        <input type="tel" name="wechat" id="wechat" lay-verType="tips" autocomplete="off"
-                                               class="layui-input">
+                                        <input type="tel" name="wechat" id="wechat" lay-verType="tips"
+                                               autocomplete="off"
+                                               class="layui-input" th:value="${need.wechat}">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -263,17 +236,13 @@
     var returnUrl = "";
     window.onload = function () {
         $(document).height($(".left-side-menu1").height($(document).height()))
-        $("body").height($(document).height()-100)
+        $("body").height($(document).height() - 100)
         $(".layui-tab-title").css("border-bottom-width", "0px");
+
     }
     layui.use(['element', 'layedit', 'laydate', 'form'], function () {
         var element = layui.element;
         var form = layui.form;
-
-        //tab页
-        element.on('tab(test)', function (data) {
-            console.log(this, data);
-        });
 
         //编辑器
         var layedit = layui.layedit;
@@ -294,6 +263,7 @@
 
 
         $("#submit").click(function () {
+            var id = $("#id").val()
             var classify = $("#classify").val()
             var title = $("#title").val()
             var money = $("#money").val()
@@ -311,10 +281,11 @@
             }
             $.ajax({
                 type: 'POST',
-                url: "/need/save",
+                url: "/need/update",
                 dataType: 'json',
                 contentType: 'application/json',
                 data: JSON.stringify({
+                    "id": id,
                     "classify": classify,
                     "title": title,
                     "money": money,
@@ -324,8 +295,10 @@
                     "comment": comment,
                     "url": rurl
                 }),
-                success: function () {
-                    alert("保存成功")
+                success: function (data) {
+                    if(data.code==200){
+                        alert(data.msg);
+                    }
                 },
                 error: function () {
                     alert("失败")
@@ -334,6 +307,7 @@
             return false
         })
         $("#draft").click(function () {
+            var id = $("#id").val()
             var classify = $("#classify").val()
             var title = $("#title").val()
             var money = $("#money").val()
@@ -351,10 +325,11 @@
             }
             $.ajax({
                 type: 'POST',
-                url: "/need/draft",
+                url: "/need/updateDraft",
                 dataType: 'json',
                 contentType: 'application/json',
                 data: JSON.stringify({
+                    "id": id,
                     "classify": classify,
                     "title": title,
                     "money": money,
@@ -364,8 +339,10 @@
                     "comment": comment,
                     "url": rurl
                 }),
-                success: function () {
-                    alert("保存成功")
+                success: function (data) {
+                    if(data.code==200){
+                        alert(data.msg);
+                    }
                 },
                 error: function () {
                     alert("失败")
@@ -379,7 +356,7 @@
     layui.use('laydate', function (laydate) {
         //日期编辑框
         laydate.render({
-            elem: '#test3'
+            elem: '#test2'
             , format: 'yyyy-MM-dd'
             , ready: function (date) {
                 console.log(date);

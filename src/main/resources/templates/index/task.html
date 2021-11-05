@@ -7,17 +7,17 @@
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"/>
 
-    <link rel="stylesheet" type="text/css" href="static/css/left-side-menu.css">
-    <link rel="stylesheet" type="text/css" href="static/font/iconfont.css">
-    <script type="text/javascript" src="static/js/jquery.min.js"></script>
-    <script type="text/javascript" src="static/js/jquery.slimscroll.min.js"></script>
-    <script type="text/javascript" src="static/js/left-side-menu.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/left-side-menu.css">
+    <link rel="stylesheet" type="text/css" href="/static/font/iconfont.css">
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="/static/js/left-side-menu.js"></script>
 
-    <script src="static/layui/layui.js"
+    <script src="/static/layui/layui.js"
             src1="http://local.res.layui.com/layui/release/laydate/dist/laydate.js"></script>
-    <link rel=stylesheet href="static/layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" href="static/index/css/jquery.sPage.css">
-    <link rel=stylesheet href="static/index/common.css">
+    <link rel=stylesheet href="/static/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/index/css/jquery.sPage.css">
+    <link rel=stylesheet href="/static/index/common.css">
 </head>
 <body style="background-color: rgb(244, 244, 244);">
 <!-- 头部 -->
@@ -46,9 +46,9 @@
                         <a href="javascript:;"><i class="my-icon lsm-sidebar-icon icon_3"></i><span>订单管理</span><i
                                 class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
-                            <li><a th:href="@{/task}"><span>任务订单</span></a></li>
-                            <li><a th:href="@{/need}"><span>发布任务</span></a></li>
-                            <li><a th:href="@{/accepTask}"><span>接单任务</span></a></li>
+                            <li><a th:href="@{/user/task}"><span>任务订单</span></a></li>
+                            <li><a th:href="@{/user/need}"><span>发布任务</span></a></li>
+                            <li><a th:href="@{/user/accepTask}"><span>接单任务</span></a></li>
                         </ul>
                     </li>
                     <li class="lsm-sidebar-item">
@@ -70,7 +70,7 @@
         <div class="layui-card">
             <div class="layui-card-header" style="text-align: center;"><strong>任务订单</strong></div>
             <div class="layui-card-body">
-                <button type="button" class="btn btn-info">发布任务</button>
+                <button type="button" class="btn btn-info" id="fabu">发布任务</button>
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -82,7 +82,7 @@
                         <th>描述价格(￥)</th>
                         <th>任务截止时间</th>
                         <th>创建时间</th>
-                        <th>查看</th>
+                        <th>锁定</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -99,19 +99,31 @@
 </div>
 
 <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
-    <p>适用浏览器：360、FireFox、Chrome、Opera、傲游、搜狗、世界之窗. 不支持Safari、IE8及以下浏览器。</p>
-    <p>来源：<a href="http://www.kaiu.net/" target="_blank">开优网络</a></p>
+    <p>发布，接单变的更容易</p>
+    <p>易接单平台<a href="#" target="_blank"></a></p>
 </div>
 </body>
-<script src="static/index/js/jquery.sPage.min.js"></script>
-<script>
+<script src="/static/index/js/jquery.sPage.min.js"></script>
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.1/clipboard.js"></script>
+<script th:inline="javascript">
+    $("#fabu").on("click", function(){
+        layer.open({
+            type: 2,
+            title: '发布任务',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['60%', '90%'],
+            content: '/user/adminNeed' //iframe的url
+        });
+    });
+
     $(function () {
-        var pagecount = 1
-        var totalcount = 10
+        var pagecount = [[${pageSize}]];
+        var totalcount = [[${total}]];
         ajaxPage(1);
         $("#myPage").sPage({
-            page: pagecount,//当前页码
-            pageSize: 1,//每页显示多少条数据，默认10条
+            page: 1,//当前页码
+            pageSize: 10,//每页显示多少条数据，默认10条
             total: totalcount,//数据总条数
             showTotal: true,//是否显示总条数，默认关闭：false
             totalTxt: "共{total}条",//数据总条数文字描述，{total}为占位符
@@ -125,12 +137,46 @@
         });
     })
 
+    function copyUrl(id) {
+        var curWwwPath=window.document.location.href;
+        var clipBoardContent =  curWwwPath.substring(0,curWwwPath.length-9)+"user/guestNeed/"+(id<<16)+"/"+id;
+        let oInput = document.createElement('input');
+        oInput.value = clipBoardContent;
+        document.body.appendChild(oInput);
+        oInput.select();
+        document.execCommand("Copy");
+        oInput.style.display = 'none';
+        document.body.removeChild(oInput);
+        window.alert('复制成功')
+    }
+
+
+    function release(id){
+        $.ajax({
+            type: "POST",
+            url: "/need/release",
+            data: JSON.stringify({
+                "id": id
+            }),
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                if(data.code==200){
+                    alert(data.msg)
+                    ajaxPage(1);
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
     //结合Ajax使用
     function ajaxPage(page) {
         var p = page || 1;
         $.ajax({
             type: "GET",
-            url: "task/taskManager",
+            url: "/task/taskManager",
             data: {
                 page: p,
                 pageSize: 10,
@@ -150,16 +196,15 @@
                         "    <td>" + data.rows[i].money + "</td>" +
                         "    <td>" + data.rows[i].deadline + "</td>" +
                         "    <td>" + data.rows[i].createTime + "</td>" +
-                        "    <td> <a type=\"button\" class=\"btn btn-info\" href=\"/need?id=" + data.rows[i].id + "\">查看需求</a>" +
+                        "    <td>" + getrock(data.rows[i].rock) + " </a>" +
                         "    </td>" +
                         "     <td>" +
-                        "         <a type=\"button\" class=\"btn btn-info\"  href=\"/need?id=" + data.rows[i].id + "\">编辑订单</a>" +
-                        "         <a type=\"button\" class=\"btn btn-info\" class=\"release\" value='" + data.rows[i].id + "'>发布订单</a>" +
+                        "         <a type=\"button\" class=\"btn btn-info\"  href=\"/user/need/" + data.rows[i].id + "\">编辑订单</a>" +
+                        "         <a type=\"button\" class=\"btn btn-info\"   onClick='release("+ data.rows[i].id +")'>发布订单</a>" +
+                        "         <a type=\"button\" class=\"btn btn-info\" class=\"copyUrl\" value='" + data.rows[i].id + "' onClick='copyUrl("+ data.rows[i].id +")'>复制链接</a>" +
                         "     </td>" +
                         "  </tr>")
                 }
-                var pagecount = data.page
-                var totalcount = data.total
             },
             error: function (e) {
                 console.log(e);
@@ -168,11 +213,20 @@
     }
 
     function getstatus(status) {
-        if (status == 1) {
+        if (status == 2) {
             return "已发布";
         } else {
             return "草稿";
         }
     }
+    function getrock(rock) {
+        if (rock == 1) {
+            return "锁定";
+        } else {
+            return "未锁定";
+        }
+    }
+
+
 </script>
 </html>

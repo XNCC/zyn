@@ -4,10 +4,7 @@ import com.example.zyn.request.Need;
 import com.example.zyn.service.index.TaskService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("task")
+@CrossOrigin
 public class TaskController {
 
     @Autowired

@@ -1,6 +1,7 @@
 package com.example.zyn.request;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @TableName("need")
@@ -27,7 +29,7 @@ public class Need implements Serializable {
     @NotNull(message = "金额不能为空")
     private BigDecimal money;
     @NotNull(message = "截止日期不能为空")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date deadline;
     @NotNull(message = "手机号不能为空")
     private String phone;
@@ -38,4 +40,7 @@ public class Need implements Serializable {
     private Date updateTime;
     private Integer status;
     private String url;
+    private Integer rock;
+    @TableField(exist = false)
+    private List<String> urllist;
 }

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>首页 - </title>
+    <link rel="icon" href="/static/index/favicon.ico" type="image/ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/left-side-menu.css">
+    <link rel="stylesheet" type="text/css" href="/static/font/iconfont.css">
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="/static/js/left-side-menu.js"></script>
+
+    <script src="/static/layui/layui.js" src1="http://local.res.layui.com/layui/release/laydate/dist/laydate.js" ></script>
+    <link rel=stylesheet href="/static/layui/css/layui.css">
+
+    <link rel=stylesheet href="/static/index/need.css">
+    <link rel=stylesheet href="/static/index/common.css">
+</head>
+<body style="background-color: rgb(244, 244, 244);">
+
+<!-- 主页面内容 -->
+<div class="layui-container">
+    <div class="layui-card">
+        <div class="layui-card-header" style="text-align: center;"><strong>发布任务</strong></div>
+        <div class="layui-card-body">
+            <div class="row">
+                <div class="layui-col-md9  layui-col-xs9">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                            <form class="layui-form layui-form-pane1" lay-filter="first" style="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">选择框</label>
+                                    <div class="layui-input-block in">
+                                        <select id="classify" name="adminClassify" lay-filter="interest">
+                                            <option value="0">脚本</option>
+                                            <option value="1">web</option>
+                                            <option value="2">游戏</option>
+                                            <option value="3">爬虫</option>
+                                            <option value="4">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">标题</label>
+                                    <div class="layui-input-block in">
+                                        <input type="text" name="title" id="adminTitle" lay-verify="required" lay-verType="tips"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block" style="text-align: center;">
+                                        <button class="layui-btn" id="adminDraft">草稿</button>
+                                        <button class="layui-btn" id="adminSubmit">提交</button>
+                                        <button type="button" class="btn btn-primary" id="testListAction1"
+                                                style="display:none">
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md2 layui-col-xs2" style="margin-left: 15px; width: 20%;">
+                    <div class="layui-card">
+                        <div class="layui-card-header"><strong>本站承诺</strong></div>
+                        <div class="layui-card-body">
+                            零交稿零投标，任务全额退款。
+                            参加悬赏任务，实名认证。
+                            验收满意，再确认付款。
+                        </div>
+                    </div>
+                    <div class="layui-card">
+                        <div class="layui-card-header"><strong>任务执行流程</strong></div>
+                        <div class="layui-card-body">
+                            <ul class="layui-timeline">
+                                <li class="layui-timeline-item">
+                                    <i class="layui-icon layui-timeline-axis"></i>
+                                    <div class="layui-timeline-content layui-text">
+                                        <div class="layui-timeline-title">发布任务</div>
+                                    </div>
+                                </li>
+                                <li class="layui-timeline-item">
+                                    <i class="layui-icon layui-timeline-axis"></i>
+                                    <div class="layui-timeline-content layui-text">
+                                        <div class="layui-timeline-title">接受订单</div>
+                                    </div>
+                                </li>
+                                <li class="layui-timeline-item">
+                                    <i class="layui-icon layui-timeline-axis"></i>
+                                    <div class="layui-timeline-content layui-text">
+                                        <div class="layui-timeline-title">完成订单</div>
+                                    </div>
+                                </li>
+                                <li class="layui-timeline-item">
+                                    <i class="layui-icon layui-timeline-axis"></i>
+                                    <div class="layui-timeline-content layui-text">
+                                        <div class="layui-timeline-title">交付订单</div>
+                                    </div>
+                                </li>
+                                <li class="layui-timeline-item">
+                                    <i class="layui-icon layui-timeline-axis"></i>
+                                    <div class="layui-timeline-content layui-text">
+                                        <div class="layui-timeline-title">结算订单</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="layui-card">
+                        <div class="layui-card-header"><strong>协助电话</strong></div>
+                        <div class="layui-card-body">
+                            18154183997
+                        </div>
+                    </div>
+                    <div class="layui-card">
+                        <div class="layui-card-header"><strong>微信服务</strong></div>
+                        <div class="layui-card-body">
+                            <img src="/static/img/微信.jpg" style="width: 90%;">
+                        </div>
+                    </div>
+                    <div class="layui-card">
+                        <div class="layui-card-header"><strong>QQ服务</strong></div>
+                        <div class="layui-card-body">
+                            <img src="/static/img/微信.jpg" style="width: 90%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+<!--主页面内容  -->
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+    <p>发布，接单变的更容易</p>
+    <p>易接单平台<a href="#" target="_blank"></a></p>
+</div>
+</body>
+<script src="/static/layui/layui.js"></script>
+<script>
+    var returnUrl = "";
+    window.onload = function () {
+        $(document).height($(".left-side-menu1").height($(document).height()))
+        $("body").height($(document).height()-100)
+        $(".layui-tab-title").css("border-bottom-width", "0px");
+    }
+    layui.use(['element', 'layedit', 'laydate', 'form'], function () {
+        var element = layui.element;
+        var form = layui.form;
+    });
+
+    $("#submit").click(function () {
+        var classify = $("#adminClassify").val()
+        var title = $("#adminTitle").val()
+        $.ajax({
+            type: 'POST',
+            url: "/need/save",
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "classify": classify,
+                "title": title
+            }),
+            success: function (data) {
+                alert("保存成功")
+            },
+            error: function () {
+                alert("失败")
+            }
+        })
+    })
+    $("#draft").click(function () {
+        var classify = $("#adminClassify").val()
+        var title = $("#adminTitle").val()
+        $.ajax({
+            type: 'POST',
+            url: "/need/draft",
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "classify": classify,
+                "title": title
+            }),
+            success: function (data) {
+                alert("保存成功")
+            },
+            error: function () {
+                alert("失败")
+            }
+        })
+    })
+</script>
+
+</html>

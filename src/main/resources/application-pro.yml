@@ -1,5 +1,12 @@
-server:
+http:
   port: 80
+
+server:
+  ssl:
+    key-store: classpath:SHA256withRSA_nccene.top.jks
+    key-store-password: 1234
+    key-store-type: JKS
+  port: 443
 
 spring:
   datasource:

@@ -68,7 +68,7 @@ public class NeedController {
     @PostMapping("/save")
     public Result save(@RequestBody Need need) {
         need.setCreateTime(new Date());
-        need.setStatus(1);
+        need.setStatus(2);
         need.setRock(2);
         needMapper.insert(need);
         return new Result(200, "保存成功", null);

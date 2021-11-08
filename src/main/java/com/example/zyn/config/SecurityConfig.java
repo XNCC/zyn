@@ -20,6 +20,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/need/updateDraft").permitAll()
                 .antMatchers("/need/upload").permitAll()
                 .antMatchers("/user/guestNeed/**").permitAll()
+                .antMatchers("/user/need").permitAll()
+                .antMatchers("/need/save").permitAll()
+                .antMatchers("/need/draft").permitAll()
+                .antMatchers("/need").permitAll()
                 .antMatchers("/static/**").permitAll()
                 .anyRequest()
                 .authenticated()//以上三局表示所有请求都要验证

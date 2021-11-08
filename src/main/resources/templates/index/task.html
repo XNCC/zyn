@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>任务管理</title>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="https://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"/>
 
     <link rel="stylesheet" type="text/css" href="/static/css/left-side-menu.css">
     <link rel="stylesheet" type="text/css" href="/static/font/iconfont.css">
@@ -14,7 +14,7 @@
     <script type="text/javascript" src="/static/js/left-side-menu.js"></script>
 
     <script src="/static/layui/layui.js"
-            src1="http://local.res.layui.com/layui/release/laydate/dist/laydate.js"></script>
+            src1="https://local.res.layui.com/layui/release/laydate/dist/laydate.js"></script>
     <link rel=stylesheet href="/static/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="/static/index/css/jquery.sPage.css">
     <link rel=stylesheet href="/static/index/common.css">
@@ -47,17 +47,17 @@
                                 class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
                             <li><a th:href="@{/user/task}"><span>任务订单</span></a></li>
-                            <li><a th:href="@{/user/need}"><span>发布任务</span></a></li>
-                            <li><a th:href="@{/user/accepTask}"><span>接单任务</span></a></li>
+<!--                            <li><a th:href="@{/user/need}"><span>发布任务</span></a></li>-->
+<!--                            <li><a th:href="@{/user/accepTask}"><span>接单任务</span></a></li>-->
                         </ul>
                     </li>
-                    <li class="lsm-sidebar-item">
-                        <a href="javascript:;"><i class="my-icon lsm-sidebar-icon icon-users"></i><span>用户管理</span><i
-                                class="my-icon lsm-sidebar-more"></i></a>
-                        <ul>
-                            <li><a href="javascript:;"><span>火影忍者8</span></a></li>
-                        </ul>
-                    </li>
+<!--                    <li class="lsm-sidebar-item">-->
+<!--                        <a href="javascript:;"><i class="my-icon lsm-sidebar-icon icon-users"></i><span>用户管理</span><i-->
+<!--                                class="my-icon lsm-sidebar-more"></i></a>-->
+<!--                        <ul>-->
+<!--                            <li><a href="javascript:;"><span>火影忍者8</span></a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
 
                 </ul>
             </div>
@@ -70,7 +70,7 @@
         <div class="layui-card">
             <div class="layui-card-header" style="text-align: center;"><strong>任务订单</strong></div>
             <div class="layui-card-body">
-                <button type="button" class="btn btn-info" id="fabu">发布任务</button>
+<!--                <button type="button" class="btn btn-info" id="fabu">发布任务</button>-->
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -199,8 +199,8 @@
                         "    <td>" + getrock(data.rows[i].rock) + " </a>" +
                         "    </td>" +
                         "     <td>" +
-                        "         <a type=\"button\" class=\"btn btn-info\"  href=\"/user/need/" + data.rows[i].id + "\">编辑订单</a>" +
-                        "         <a type=\"button\" class=\"btn btn-info\"   onClick='release("+ data.rows[i].id +")'>发布订单</a>" +
+                        "         <a type=\"button\" class=\"btn btn-info\" target='_blank' href=\"/user/need/" + data.rows[i].id + "\">编辑订单</a>" +
+                        "         <a type=\"button\" class=\"btn btn-info\"   onClick='release("+ data.rows[i].id +")'>锁定订单</a>" +
                         "         <a type=\"button\" class=\"btn btn-info\" class=\"copyUrl\" value='" + data.rows[i].id + "' onClick='copyUrl("+ data.rows[i].id +")'>复制链接</a>" +
                         "     </td>" +
                         "  </tr>")
